@@ -9,6 +9,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          # Specify the desired Node.js version
+          node-version: '20'
 
       # Used to cache dependencies with a timeout
       - name: Get Date
@@ -23,8 +26,7 @@ jobs:
           path: .buildozer_global
           key: buildozer-global-${{ hashFiles('buildozer.spec') }} # Replace with your path
 
-      - name: Cache Buildozer directory
-        uses: actions/cache@v2
+      - uses: actions/cache@v2
         with:
           path: .buildozer
           key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-${{ hashFiles('buildozer.spec') }}
